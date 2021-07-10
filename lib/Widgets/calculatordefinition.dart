@@ -37,7 +37,7 @@ class Calculator extends StatelessWidget {
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),
             height: theme.calculatorChipHeight,
-            decoration: theme.calculatorDecoration(),
+            decoration: theme.calculatorDecoration(true),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(

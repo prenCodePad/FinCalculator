@@ -1,4 +1,5 @@
 import 'package:fincalculator/Widgets/donutchart.dart';
+import 'package:fincalculator/Widgets/repaymentschedule.dart';
 import 'package:fincalculator/Widgets/results.dart';
 import 'package:fincalculator/Widgets/sliderinput.dart';
 import 'package:fincalculator/locator.dart';
@@ -19,7 +20,7 @@ class EMICalculator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = locator<FinAppTheme>();
-
+    final emiProvider = Provider.of<EMIProvider>(context, listen: true);
     return Container(
         height: theme.emiScreenHeight,
         child: DefaultTabController(
@@ -27,7 +28,7 @@ class EMICalculator extends StatelessWidget {
             child: Column(children: [
               Container(
                 color: Color(0xff1C7EC9),
-                height: 50,
+                height: theme.defaultNavBarHeight,
                 child: TabBar(
                     tabs: _tabs,
                     indicatorColor: theme.white,
@@ -36,7 +37,7 @@ class EMICalculator extends StatelessWidget {
               Expanded(
                   child: TabBarView(children: [
                 Analysis(),
-                const Center(child: Text('REPORT'))
+                RepaymentSchedule(emiSchedule: emiProvider.rapaymentSchedule)
               ]))
             ])));
   }

@@ -16,6 +16,8 @@ class FinAppTheme {
 
   TextStyle display16w600() => GoogleFonts.lato(
       fontSize: 16, fontWeight: FontWeight.w600, color: chipTextColor);
+  TextStyle display14w1000() => GoogleFonts.lato(
+      fontSize: 18, fontWeight: FontWeight.bold, color: chipTextColor);
 
   TextStyle display20w400() => GoogleFonts.lato(
       fontSize: 20, fontWeight: FontWeight.w400, color: chipTextColor);
@@ -25,6 +27,8 @@ class FinAppTheme {
   double get noAppBarMargin => ScreenUtil().screenHeight * 0.03;
   double get sliderHeight => ScreenUtil().screenHeight * 0.1;
   double get fullheight => ScreenUtil().screenHeight;
+  double get reportHeight => ScreenUtil().screenHeight * 0.75;
+  double get defaultNavBarHeight => ScreenUtil().screenHeight * 0.056;
   double get investmentScreenheight => ScreenUtil().screenHeight * 0.9;
   double get emiScreenHeight => ScreenUtil().screenHeight * 0.9;
   double get chartradius => ScreenUtil().screenWidth * 0.3;
@@ -57,7 +61,7 @@ class FinAppTheme {
   Gradient _gradient(List<Color> colors) => LinearGradient(
       colors: colors, begin: Alignment.topLeft, end: Alignment.bottomRight);
 
-  BoxDecoration calculatorDecoration() => BoxDecoration(
+  BoxDecoration calculatorDecoration(bool isCal) => BoxDecoration(
         boxShadow: [_chipShadow],
         // image: DecorationImage(
         //   colorFilter: ColorFilter.mode(
@@ -65,7 +69,7 @@ class FinAppTheme {
         //   image: AssetImage("assets/images/investment2.jfif"),
         // ),
         color: white,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(isCal ? 10 : 5),
         border: Border.all(width: 2, color: border),
       );
 

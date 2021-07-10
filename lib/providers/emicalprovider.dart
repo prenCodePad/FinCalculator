@@ -1,7 +1,9 @@
 import 'dart:math';
 import 'package:fincalculator/Models/CalculationVariables.dart';
+import 'package:fincalculator/Models/scheduledemi.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
 
 class EMIProvider extends ChangeNotifier {
   List<String> get emiAttributes => [
@@ -53,6 +55,8 @@ class EMIProvider extends ChangeNotifier {
         "Interest Rate": interestController,
         "Loan Tenure": tenureController,
       };
+
+  List<ScheduledEMI> get rapaymentSchedule => _getRepaymentSchedule();
   bool _isTenureInMonths = false;
   bool get isTenureInMonths => _isTenureInMonths;
   double get loanAmount => _loanAmount;
@@ -138,6 +142,29 @@ class EMIProvider extends ChangeNotifier {
         : attribute == "Interest Rate"
             ? interestRate
             : tenure;
+  }
+
+  List<ScheduledEMI> _getRepaymentSchedule() {
+    var outstandingAmount = loanAmount;
+    List<ScheduledEMI> emiSchedule = [];
+
+    for (int i = 1; i <= tenureInMonths; i++) {
+      double interest;
+      double principal;
+      ScheduledEMI installment = new ScheduledEMI();
+      interest = rateOFAnnualInterest * outstandingAmount;
+      principal = emi - interest;
+      outstandingAmount = outstandingAmount - principal;
+      installment.installmentDate = i == 1
+          ? DateTime.now()
+          : Jiffy(DateTime.now()).add(months: i).dateTime;
+      installment.interest = interest;
+      installment.outstandingBalance = outstandingAmount;
+      installment.principal = principal;
+      emiSchedule.add(installment);
+    }
+
+    return emiSchedule;
   }
 
   Map<String, double> get dataMap =>
