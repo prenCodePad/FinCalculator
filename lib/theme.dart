@@ -26,6 +26,7 @@ class FinAppTheme {
   double get sliderHeight => ScreenUtil().screenHeight * 0.1;
   double get fullheight => ScreenUtil().screenHeight;
   double get investmentScreenheight => ScreenUtil().screenHeight * 0.9;
+  double get emiScreenHeight => ScreenUtil().screenHeight * 0.9;
   double get chartradius => ScreenUtil().screenWidth * 0.3;
 
   TextStyle body18w400() => GoogleFonts.lato(
@@ -46,7 +47,7 @@ class FinAppTheme {
       offset: const Offset(0, 8));
 
   InputDecoration formTextDecoration(String label) => InputDecoration(
-      contentPadding: new EdgeInsets.symmetric(vertical: 3, horizontal: 10),
+      contentPadding: new EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       labelText: label,
       labelStyle: TextStyle(fontWeight: FontWeight.bold),
       border: OutlineInputBorder(

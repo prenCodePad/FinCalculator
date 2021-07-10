@@ -34,7 +34,9 @@ class SliderInput extends StatelessWidget {
           label: label,
           action: action,
         ),
-        heading == "Monthly Investment" || heading == "Total Investment"
+        heading == "Monthly Investment" ||
+                heading == "Total Investment" ||
+                heading == "Loan Amount"
             ? Slider(
                 value: sliderValue.toDouble(),
                 min: min,

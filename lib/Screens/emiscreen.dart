@@ -1,10 +1,13 @@
-import 'package:fincalculator/Widgets/investmentcalculator.dart';
+import 'package:fincalculator/Widgets/emicalculator.dart';
 import 'package:fincalculator/locator.dart';
+import 'package:fincalculator/providers/emicalprovider.dart';
 import 'package:fincalculator/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EMIScreen extends StatelessWidget {
   EMIScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var theme = locator<FinAppTheme>();
@@ -19,8 +22,7 @@ class EMIScreen extends StatelessWidget {
         ),
         backgroundColor: theme.white,
         body: SingleChildScrollView(
-            child: Center(
-          child: Text("Coming Soon.."),
-        )));
+            child: ChangeNotifierProvider(
+                create: (_) => EMIProvider(), child: EMICalculator())));
   }
 }

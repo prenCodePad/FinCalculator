@@ -1,7 +1,9 @@
 import 'package:fincalculator/Widgets/investmentcalculator.dart';
 import 'package:fincalculator/locator.dart';
+import 'package:fincalculator/providers/investmentcalprovider.dart';
 import 'package:fincalculator/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class InvestmentScreen extends StatelessWidget {
   InvestmentScreen({Key? key}) : super(key: key);
@@ -18,6 +20,9 @@ class InvestmentScreen extends StatelessWidget {
           ),
         ),
         backgroundColor: theme.white,
-        body: SingleChildScrollView(child: InvestmentCalculator()));
+        body: SingleChildScrollView(
+            child: ChangeNotifierProvider(
+                create: (_) => InvestmentProvider(),
+                child: InvestmentCalculator())));
   }
 }

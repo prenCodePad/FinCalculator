@@ -22,7 +22,6 @@ class FinanceForm extends StatelessWidget {
     var theme = locator<FinAppTheme>();
 
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(flex: 1, child: Text(heading, style: theme.display20w400())),
@@ -30,14 +29,21 @@ class FinanceForm extends StatelessWidget {
         Expanded(
             flex: 1,
             child: Container(
-                height: 35,
                 child: TextFormField(
                     keyboardType: TextInputType.number,
                     style: theme.display20w400(),
                     textAlign: TextAlign.end,
                     controller: controller,
+                    autovalidateMode: AutovalidateMode.always,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Field is Mandatory';
+                      }
+                      return null;
+                    },
                     onFieldSubmitted: (value) {
-                      action!(int.parse(value).toDouble(), false, heading);
+                      if (value != "")
+                        action!(int.parse(value).toDouble(), false, heading);
                     },
                     decoration: theme.formTextDecoration(label!))))
       ],

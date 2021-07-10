@@ -43,21 +43,21 @@ class InvestmentCalculator extends StatelessWidget {
           Expanded(
               flex: 5,
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
                       flex: 1,
-                      child: Container(
-                          alignment: Alignment.center,
-                          child: DonutRepresetation(
-                            dataMap: investmentProvider.dataMap,
-                          ))),
+                      child: DonutRepresentation(
+                        dataMap: investmentProvider.dataMap,
+                      )),
                   Expanded(
                       flex: 1,
                       child: Results(
-                        estimatedReturns: investmentProvider.finalReturns,
-                        investedValue: investmentProvider.finalInvestedAmount,
-                        totalValue: investmentProvider.finalTotalAmount,
+                        label1: "Invested Value",
+                        value1: investmentProvider.finalInvestedAmount,
+                        label2: "Est. Returns",
+                        value2: investmentProvider.finalReturns,
+                        label3: "Total Value",
+                        value3: investmentProvider.finalTotalAmount,
                       ))
                 ],
               ))

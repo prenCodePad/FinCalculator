@@ -4,47 +4,54 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class Results extends StatelessWidget {
-  final double investedValue;
-  final double estimatedReturns;
-  final double totalValue;
-  Results(
-      {Key? key,
-      required this.investedValue,
-      required this.estimatedReturns,
-      required this.totalValue})
-      : super(key: key);
+  final String label1;
+  final double value1;
+  final String label2;
+  final double value2;
+  final String label3;
+  final double value3;
+  Results({
+    Key? key,
+    required this.label1,
+    required this.value1,
+    required this.label2,
+    required this.value2,
+    required this.label3,
+    required this.value3,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     var theme = locator<FinAppTheme>();
-    var formatter = NumberFormat('#,##,000');
+    var formatter = NumberFormat('#,##,#00');
     return Container(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Text(
-        "Invested Value",
+        label1,
         style: theme.body4(),
       ),
       Text(
-        "₹${formatter.format(investedValue.toInt())}",
+        "₹${formatter.format(value1.toInt())}",
         style: theme.body2(),
       ),
-      SizedBox(height: 10),
+      SizedBox(height: 15),
       Text(
-        "Est. Returns",
+        label2,
         style: theme.body4(),
       ),
       Text(
-        "₹${formatter.format(estimatedReturns.toInt())}",
+        "₹${formatter.format(value2.toInt())}",
         style: theme.body2(),
       ),
-      SizedBox(height: 10),
+      SizedBox(height: 15),
       Text(
-        "Total Value",
+        label3,
         style: theme.body4(),
       ),
       Text(
-        "₹${formatter.format(totalValue.toInt())}",
+        "₹${formatter.format(value3.toInt())}",
         style: theme.body2(),
       ),
+      SizedBox(height: 15),
     ]));
   }
 }

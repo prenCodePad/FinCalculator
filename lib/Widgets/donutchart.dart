@@ -3,17 +3,18 @@ import 'package:fincalculator/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 
-class DonutRepresetation extends StatelessWidget {
+class DonutRepresentation extends StatelessWidget {
   final Map<String, double> dataMap;
-  DonutRepresetation({Key? key, required this.dataMap}) : super(key: key);
+  DonutRepresentation({Key? key, required this.dataMap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var colorList = [Colors.blueAccent, Colors.greenAccent];
     var theme = locator<FinAppTheme>();
+
     return PieChart(
       dataMap: dataMap,
-      animationDuration: Duration(milliseconds: 1000),
+      animationDuration: Duration(milliseconds: 2000),
       chartLegendSpacing: 32,
       chartRadius: theme.chartradius,
       colorList: colorList,

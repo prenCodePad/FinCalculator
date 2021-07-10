@@ -30,6 +30,7 @@ class InvestmentProvider with ChangeNotifier {
   double _rateOfInterest = 2;
   double _timeperiod = 1;
   String _typeOfInvestment = "LUMPSUM";
+  int _key = 0;
 
   TextEditingController get investmentController =>
       new TextEditingController(text: investedValue.toInt().toString());
@@ -53,7 +54,7 @@ class InvestmentProvider with ChangeNotifier {
         "Est Return Rate": returnRateController,
         "Time Period": timePeriodController
       };
-
+  int get key => _key;
   String get typeOfInvestment => _typeOfInvestment;
   double get investedValue => _investedValue;
   double get rateOfInterestMonthly => (_rateOfInterest * 0.01) / 12;
@@ -97,6 +98,10 @@ class InvestmentProvider with ChangeNotifier {
   }
 
   //Setters
+  void setKey() {
+    _key = _key + 1;
+  }
+
   void setTypesOfInvestment(type) {
     _typeOfInvestment = type;
     notifyListeners();
@@ -126,6 +131,7 @@ class InvestmentProvider with ChangeNotifier {
     if (isSlider) {
       _controllerMap[attribute]!.text = value.toString();
     }
+
     notifyListeners();
   }
 
