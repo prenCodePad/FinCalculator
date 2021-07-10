@@ -10,19 +10,21 @@ class InvestmentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = locator<FinAppTheme>();
-    return Scaffold(
-        appBar: AppBar(
-          flexibleSpace: Container(decoration: theme.appbardecoration()),
-          backgroundColor: theme.appBarColor,
-          title: Text(
-            "Investment Calculator",
-            style: theme.display24w600(),
-          ),
-        ),
-        backgroundColor: theme.white,
-        body: SingleChildScrollView(
-            child: ChangeNotifierProvider(
-                create: (_) => InvestmentProvider(),
-                child: InvestmentCalculator())));
+    return GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Scaffold(
+            appBar: AppBar(
+              flexibleSpace: Container(decoration: theme.appbardecoration()),
+              backgroundColor: theme.appBarColor,
+              title: Text(
+                "Investment Calculator",
+                style: theme.display24w600(),
+              ),
+            ),
+            backgroundColor: theme.white,
+            body: SingleChildScrollView(
+                child: ChangeNotifierProvider(
+                    create: (_) => InvestmentProvider(),
+                    child: InvestmentCalculator()))));
   }
 }

@@ -8,37 +8,41 @@ class InvestmentProvider with ChangeNotifier {
         typeOfInvestment == "SIP" ? "Monthly Investment" : "Total Investment":
             CalculationVariables(
                 controller: investmentController,
-                divisions: 399,
+                divisions: 200,
                 max: 200000,
-                min: 500,
+                min: 0,
                 representation: "₹"),
         "Est Return Rate": CalculationVariables(
             controller: returnRateController,
             divisions: 27,
             max: 30,
-            min: 2,
+            min: 0,
             representation: "%"),
         "Time Period": CalculationVariables(
             controller: timePeriodController,
             divisions: 28,
             max: 30,
-            min: 1,
+            min: 0,
             representation: "Yr"),
       };
 
   double _investedValue = 500;
   double _rateOfInterest = 2;
   double _timeperiod = 1;
-  String _typeOfInvestment = "LUMPSUM";
+  String _typeOfInvestment = "SIP";
   int _key = 0;
+  TextEditingController _investmentController =
+      new TextEditingController(text: "500");
+  TextEditingController _returnRateController =
+      new TextEditingController(text: "2");
+  TextEditingController _timePeriodController =
+      new TextEditingController(text: "1");
 
-  TextEditingController get investmentController =>
-      new TextEditingController(text: investedValue.toInt().toString());
+  TextEditingController get investmentController => _investmentController;
 
-  TextEditingController get returnRateController =>
-      new TextEditingController(text: displayRateOfInterest.toInt().toString());
-  TextEditingController get timePeriodController =>
-      new TextEditingController(text: timePeriodYears.toInt().toString());
+  TextEditingController get returnRateController => _returnRateController;
+
+  TextEditingController get timePeriodController => _timePeriodController;
 
   //getters
   List<String> get typesOfInvestment => ["SIP", "LUMPSUM"];
@@ -71,11 +75,7 @@ class InvestmentProvider with ChangeNotifier {
   double get maturityForLumpSum =>
       investedValue * (pow(1 + rateOfInterestAnnually, timePeriodYears));
 
-  double get totalinvestedAmountSIP {
-    print(
-        "invested $_investedValue timeperiod $_timeperiod total ${_investedValue * _timeperiod * 12}");
-    return _investedValue * _timeperiod * 12;
-  }
+  double get totalinvestedAmountSIP => _investedValue * _timeperiod * 12;
 
   double get returnsForSip => maturityForSip - totalinvestedAmountSIP;
   double get returnsForLumpsum => maturityForLumpSum - investedValue;
@@ -107,27 +107,14 @@ class InvestmentProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setValue(value, isSlider, attribute) {
-    switch (attribute) {
-      case "Monthly Investment":
-        setInvestedValue(value);
-        break;
-      case "Total Investment":
-        setInvestedValue(value);
-        break;
-      case "Est Return Rate":
-        setRateofInterest(value);
-        break;
-      case "Time Period":
-        setTimePeriod(value);
-        break;
-      default:
-        {
-          //statements;
-        }
-        break;
+  void setValue(int value, isSlider, attribute) {
+    if (attribute == "Monthly Investment" || attribute == "Total Investment") {
+      setInvestedValue(value.toDouble());
+    } else if (attribute == "Est Return Rate") {
+      setRateofInterest(value.toDouble());
+    } else {
+      setTimePeriod(value.toDouble());
     }
-
     if (isSlider) {
       _controllerMap[attribute]!.text = value.toString();
     }
@@ -135,46 +122,22 @@ class InvestmentProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setInvestedValue(value) {
-    if (value > 200000) {
-      investmentController.text = 200000.toString();
-      _investedValue = 200000.0;
-    } else if (value < 500) {
-      investmentController.text = 500.toString();
-      _investedValue = 500.0;
-    } else {
-      _investedValue = value;
-    }
-  }
+  void setInvestedValue(value) => _investedValue = value;
 
-  void setRateofInterest(value) {
-    if (value > 30) {
-      returnRateController.text = 30.toString();
-      _rateOfInterest = 30.0;
-    } else if (value < 1) {
-      returnRateController.text = 1.toString();
-      _rateOfInterest = 1.0;
-    } else {
-      _rateOfInterest = value;
-    }
-  }
+  void setRateofInterest(value) => _rateOfInterest = value;
 
-  void setTimePeriod(value) {
-    if (value > 30) {
-      timePeriodController.text = 30.toString();
-      _timeperiod = 30.0;
-    } else if (value < 1) {
-      timePeriodController.text = 1.toString();
-      _timeperiod = 1.0;
-    } else {
-      _timeperiod = value;
-    }
-  }
+  void setTimePeriod(value) => _timeperiod = value;
 
   Map<String, double> get dataMap => {
-        "Invested Amount":
-            typeOfInvestment == "SIP" ? totalinvestedAmountSIP : investedValue,
-        "Est Returns":
-            typeOfInvestment == "SIP" ? returnsForSip : returnsForLumpsum,
+        "Invested Amount": typeOfInvestment == "SIP"
+            ? totalinvestedAmountSIP.isNaN
+                ? investedValue
+                : totalinvestedAmountSIP
+            : investedValue,
+        "Est Returns": typeOfInvestment == "SIP"
+            ? returnsForSip.isNaN
+                ? 0
+                : returnsForSip
+            : returnsForLumpsum,
       };
 }

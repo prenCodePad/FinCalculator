@@ -12,18 +12,20 @@ class EMIScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = locator<FinAppTheme>();
-    return Scaffold(
-        appBar: AppBar(
-          flexibleSpace: Container(decoration: theme.appbardecoration()),
-          backgroundColor: theme.appBarColor,
-          title: Text(
-            "EMI Calculator",
-            style: theme.display24w600(),
-          ),
-        ),
-        backgroundColor: theme.white,
-        body: SingleChildScrollView(
-            child: ChangeNotifierProvider(
-                create: (_) => EMIProvider(), child: EMICalculator())));
+    return GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Scaffold(
+            appBar: AppBar(
+              flexibleSpace: Container(decoration: theme.appbardecoration()),
+              backgroundColor: theme.appBarColor,
+              title: Text(
+                "EMI Calculator",
+                style: theme.display24w600(),
+              ),
+            ),
+            backgroundColor: theme.white,
+            body: SingleChildScrollView(
+                child: ChangeNotifierProvider(
+                    create: (_) => EMIProvider(), child: EMICalculator()))));
   }
 }

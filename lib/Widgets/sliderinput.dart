@@ -29,11 +29,12 @@ class SliderInput extends StatelessWidget {
         child: Column(
       children: [
         FinanceForm(
-          heading: heading,
-          controller: controller,
-          label: label,
-          action: action,
-        ),
+            heading: heading,
+            controller: controller,
+            label: label,
+            action: action,
+            max: max.toInt(),
+            min: min.toInt()),
         heading == "Monthly Investment" ||
                 heading == "Total Investment" ||
                 heading == "Loan Amount"
@@ -43,14 +44,16 @@ class SliderInput extends StatelessWidget {
                 max: max,
                 divisions: divisions,
                 onChanged: (double? value) {
-                  action(value!.toInt().toDouble(), true, heading);
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  action(value!.toInt(), true, heading);
                 })
             : Slider(
                 value: sliderValue.toDouble(),
                 min: min,
                 max: max,
                 onChanged: (double? value) {
-                  action(value!.toInt().toDouble(), true, heading);
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  action(value!.toInt(), true, heading);
                 })
       ],
     ));

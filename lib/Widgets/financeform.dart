@@ -8,18 +8,27 @@ class FinanceForm extends StatelessWidget {
   final TextEditingController controller;
   final String? label;
   final Function? action;
+  final int? max;
+  final int? min;
 
-  FinanceForm({
-    Key? key,
-    required this.heading,
-    required this.controller,
-    this.label,
-    this.action,
-  }) : super(key: key);
+  FinanceForm(
+      {Key? key,
+      required this.heading,
+      required this.controller,
+      this.label,
+      this.action,
+      this.max,
+      this.min})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var theme = locator<FinAppTheme>();
+    SnackBar snackBar(String message) {
+      return SnackBar(
+        content: Text(message),
+      );
+    }
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -30,20 +39,28 @@ class FinanceForm extends StatelessWidget {
             flex: 1,
             child: Container(
                 child: TextFormField(
+                    inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r"[0-9]"))
+                ],
                     keyboardType: TextInputType.number,
                     style: theme.display20w400(),
                     textAlign: TextAlign.end,
+                    textAlignVertical: TextAlignVertical.center,
                     controller: controller,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Field is Mandatory';
+                    onChanged: (value) {
+                      if (value.isEmpty || value == "") {
+                        action!(0, false, heading);
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(snackBar("Blank is considered as 0"));
+                      } else if (int.parse(value) > max!) {
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        controller.text = max.toString();
+                        action!(max, false, heading);
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(snackBar("Exceeded maximum value"));
+                      } else {
+                        action!(int.parse(value), false, heading);
                       }
-                      return null;
-                    },
-                    onFieldSubmitted: (value) {
-                      if (value != "")
-                        action!(int.parse(value).toDouble(), false, heading);
                     },
                     decoration: theme.formTextDecoration(label!))))
       ],

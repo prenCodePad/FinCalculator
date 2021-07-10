@@ -17,7 +17,7 @@ class RepaymentSchedule extends StatelessWidget {
       "Principal",
       "Outstanding"
     ];
-    var formatter = NumberFormat('#,##,#00');
+    var formatter = NumberFormat('#,##,##0');
     return Column(children: [
       Container(
           padding: EdgeInsets.fromLTRB(10, 15, 10, 15),

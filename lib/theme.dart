@@ -51,8 +51,9 @@ class FinAppTheme {
       offset: const Offset(0, 8));
 
   InputDecoration formTextDecoration(String label) => InputDecoration(
-      contentPadding: new EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      contentPadding: new EdgeInsets.symmetric(vertical: 0, horizontal: 10),
       labelText: label,
+      errorStyle: TextStyle(fontSize: 8),
       labelStyle: TextStyle(fontWeight: FontWeight.bold),
       border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
@@ -63,11 +64,6 @@ class FinAppTheme {
 
   BoxDecoration calculatorDecoration(bool isCal) => BoxDecoration(
         boxShadow: [_chipShadow],
-        // image: DecorationImage(
-        //   colorFilter: ColorFilter.mode(
-        //       Colors.white.withOpacity(0.5), BlendMode.dstATop),
-        //   image: AssetImage("assets/images/investment2.jfif"),
-        // ),
         color: white,
         borderRadius: BorderRadius.circular(isCal ? 10 : 5),
         border: Border.all(width: 2, color: border),
@@ -75,8 +71,6 @@ class FinAppTheme {
 
   BoxDecoration imageDecoration() => BoxDecoration(
         image: DecorationImage(
-          // colorFilter: ColorFilter.mode(
-          //     Colors.white.withOpacity(0.1), BlendMode.dstATop),
           image: AssetImage("assets/images/investment2.jfif"),
         ),
       );

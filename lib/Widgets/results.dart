@@ -22,7 +22,10 @@ class Results extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = locator<FinAppTheme>();
-    var formatter = NumberFormat('#,##,#00');
+    var formatter = NumberFormat('#,##,##0');
+    print("value1 $value1");
+    print("value2 $value2");
+    print("value3 $value3");
     return Container(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Text(
@@ -30,7 +33,7 @@ class Results extends StatelessWidget {
         style: theme.body4(),
       ),
       Text(
-        "₹${formatter.format(value1.toInt())}",
+        "₹${formatter.format(value1.isNaN || value1.isInfinite ? 0 : value1 == 0 ? 0 : value1.toInt())}",
         style: theme.body2(),
       ),
       SizedBox(height: 15),
@@ -39,7 +42,7 @@ class Results extends StatelessWidget {
         style: theme.body4(),
       ),
       Text(
-        "₹${formatter.format(value2.toInt())}",
+        "₹${formatter.format(value2.isNaN ? 0 : value2.toInt())}",
         style: theme.body2(),
       ),
       SizedBox(height: 15),
@@ -48,7 +51,7 @@ class Results extends StatelessWidget {
         style: theme.body4(),
       ),
       Text(
-        "₹${formatter.format(value3.toInt())}",
+        "₹${formatter.format(value3.isNaN ? value1.isNaN ? 0 : value1 : value3.toInt())}",
         style: theme.body2(),
       ),
       SizedBox(height: 15),

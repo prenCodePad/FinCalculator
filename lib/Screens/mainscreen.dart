@@ -9,19 +9,21 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = locator<FinAppTheme>();
-    return Scaffold(
-      backgroundColor: theme.screenBgc,
-      appBar: AppBar(
-        flexibleSpace: Container(decoration: theme.appbardecoration()),
-        backgroundColor: theme.appBarColor,
-        title: Text(
-          "Financial Calculators",
-          style: theme.display24w600(),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: AvailableCalculators(),
-      ),
-    );
+    return GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Scaffold(
+          backgroundColor: theme.screenBgc,
+          appBar: AppBar(
+            flexibleSpace: Container(decoration: theme.appbardecoration()),
+            backgroundColor: theme.appBarColor,
+            title: Text(
+              "Financial Calculators",
+              style: theme.display24w600(),
+            ),
+          ),
+          body: SingleChildScrollView(
+            child: AvailableCalculators(),
+          ),
+        ));
   }
 }

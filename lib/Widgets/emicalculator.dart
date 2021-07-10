@@ -87,7 +87,7 @@ class Analysis extends StatelessWidget {
                       child: Results(
                         label1: "EMI",
                         value1: emiProvider.emi,
-                        label2: "Total Interest Payable",
+                        label2: "Total Interest",
                         value2: emiProvider.interestPayable,
                         label3: "Total Payment (P+I)",
                         value3: emiProvider.totalPayable,
