@@ -1,6 +1,7 @@
 import 'package:fincalculator/Widgets/emicalculator.dart';
 import 'package:fincalculator/locator.dart';
 import 'package:fincalculator/providers/emicalprovider.dart';
+
 import 'package:fincalculator/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

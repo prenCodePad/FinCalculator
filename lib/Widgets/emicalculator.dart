@@ -2,7 +2,7 @@ import 'package:fincalculator/Widgets/donutchart.dart';
 import 'package:fincalculator/Widgets/results.dart';
 import 'package:fincalculator/Widgets/sliderinput.dart';
 import 'package:fincalculator/locator.dart';
-import 'package:fincalculator/providers/emiCalProvider.dart';
+import 'package:fincalculator/providers/emicalprovider.dart';
 
 import 'package:fincalculator/theme.dart';
 import 'package:flutter/material.dart';
