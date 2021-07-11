@@ -8,8 +8,8 @@ class FinanceForm extends StatelessWidget {
   final TextEditingController controller;
   final String? label;
   final Function? action;
-  final int? max;
-  final int? min;
+  final double? max;
+  final double? min;
 
   FinanceForm(
       {Key? key,
@@ -26,6 +26,7 @@ class FinanceForm extends StatelessWidget {
     var theme = locator<FinAppTheme>();
     SnackBar snackBar(String message) {
       return SnackBar(
+        duration: Duration(seconds: 2),
         content: Text(message),
       );
     }
@@ -49,17 +50,17 @@ class FinanceForm extends StatelessWidget {
                     controller: controller,
                     onChanged: (value) {
                       if (value.isEmpty || value == "") {
-                        action!(0, false, heading);
+                        action!(0.0, false, heading);
                         ScaffoldMessenger.of(context)
                             .showSnackBar(snackBar("Blank is considered as 0"));
                       } else if (int.parse(value) > max!) {
                         FocusManager.instance.primaryFocus?.unfocus();
-                        controller.text = max.toString();
+                        controller.text = max!.round().toString();
                         action!(max, false, heading);
                         ScaffoldMessenger.of(context)
                             .showSnackBar(snackBar("Exceeded maximum value"));
                       } else {
-                        action!(int.parse(value), false, heading);
+                        action!(double.parse(value), false, heading);
                       }
                     },
                     decoration: theme.formTextDecoration(label!))))

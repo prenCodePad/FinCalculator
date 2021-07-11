@@ -63,11 +63,11 @@ class Analysis extends StatelessWidget {
                         return SliderInput(
                             heading: e,
                             label: emiVariables[e]!.representation,
-                            sliderValue: emiProvider.sliderValue(e).toInt(),
+                            sliderValue: emiProvider.sliderValue(e),
                             controller: emiVariables[e]!.controller!,
                             min: emiVariables[e]!.min!,
                             max: emiVariables[e]!.max!,
-                            divisions: emiVariables[e]!.divisions!.toInt(),
+                            divisions: emiVariables[e]!.divisions!,
                             action: emiProvider.setValue);
                       }).toList()))),
           Expanded(

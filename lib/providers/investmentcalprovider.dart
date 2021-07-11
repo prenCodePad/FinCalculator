@@ -66,11 +66,16 @@ class InvestmentProvider with ChangeNotifier {
   double get displayRateOfInterest => _rateOfInterest;
   double get timeperiodMonths => _timeperiod * 12;
   double get timePeriodYears => _timeperiod;
-  double get maturityForSip =>
-      investedValue *
-      ((pow(1 + rateOfInterestMonthly, timeperiodMonths) - 1) /
-          rateOfInterestMonthly) *
-      (1 + rateOfInterestMonthly);
+  double get maturityForSip {
+    if (rateOfInterestMonthly.round() == 0) {
+      return investedValue * timeperiodMonths;
+    } else {
+      return investedValue *
+          ((pow(1 + rateOfInterestMonthly, timeperiodMonths) - 1) /
+              rateOfInterestMonthly) *
+          (1 + rateOfInterestMonthly);
+    }
+  }
 
   double get maturityForLumpSum =>
       investedValue * (pow(1 + rateOfInterestAnnually, timePeriodYears));
@@ -107,16 +112,16 @@ class InvestmentProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setValue(int value, isSlider, attribute) {
+  void setValue(double value, isSlider, attribute) {
     if (attribute == "Monthly Investment" || attribute == "Total Investment") {
-      setInvestedValue(value.toDouble());
+      setInvestedValue(value);
     } else if (attribute == "Est Return Rate") {
-      setRateofInterest(value.toDouble());
+      setRateofInterest(value);
     } else {
-      setTimePeriod(value.toDouble());
+      setTimePeriod(value);
     }
     if (isSlider) {
-      _controllerMap[attribute]!.text = value.toString();
+      _controllerMap[attribute]!.text = value.round().toString();
     }
 
     notifyListeners();

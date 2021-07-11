@@ -10,7 +10,7 @@ class CalculationVariables {
 
   double? min;
   double? max;
-  double? divisions;
+  int? divisions;
   String? representation;
   TextEditingController? controller;
 }

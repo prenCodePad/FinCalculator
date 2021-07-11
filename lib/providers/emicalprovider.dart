@@ -87,17 +87,17 @@ class EMIProvider extends ChangeNotifier {
 
   //setters
 
-  void setValue(int value, isSlider, attribute) {
+  void setValue(double value, isSlider, attribute) {
     if (attribute == "Loan Amount") {
-      setLoanAmount(value.toDouble());
+      setLoanAmount(value);
     } else if (attribute == "Interest Rate") {
-      setInterest(value.toDouble());
+      setInterest(value);
     } else {
-      setTenure(value.toDouble());
+      setTenure(value);
     }
 
     if (isSlider) {
-      _controllerMap[attribute]!.text = value.toString();
+      _controllerMap[attribute]!.text = value.round().toString();
     }
 
     notifyListeners();
@@ -126,6 +126,10 @@ class EMIProvider extends ChangeNotifier {
       double principal;
       ScheduledEMI installment = new ScheduledEMI();
       interest = rateOFAnnualInterest * outstandingAmount;
+      print("interest$rateOFAnnualInterest");
+      print("outsnading$outstandingAmount");
+      print("interest$interest");
+
       principal = emi - interest;
       outstandingAmount = outstandingAmount - principal;
       installment.installmentDate = i == 1

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class SliderInput extends StatelessWidget {
   final String heading;
   final String? label;
-  final int sliderValue;
+  final double sliderValue;
   final TextEditingController controller;
   final double min;
   final double max;
@@ -33,19 +33,19 @@ class SliderInput extends StatelessWidget {
             controller: controller,
             label: label,
             action: action,
-            max: max.toInt(),
-            min: min.toInt()),
+            max: max,
+            min: min),
         heading == "Monthly Investment" ||
                 heading == "Total Investment" ||
                 heading == "Loan Amount"
             ? Slider(
-                value: sliderValue.toDouble(),
+                value: sliderValue,
                 min: min,
                 max: max,
                 divisions: divisions,
                 onChanged: (double? value) {
                   FocusManager.instance.primaryFocus?.unfocus();
-                  action(value!.toInt(), true, heading);
+                  action(value!, true, heading);
                 })
             : Slider(
                 value: sliderValue.toDouble(),
@@ -53,7 +53,7 @@ class SliderInput extends StatelessWidget {
                 max: max,
                 onChanged: (double? value) {
                   FocusManager.instance.primaryFocus?.unfocus();
-                  action(value!.toInt(), true, heading);
+                  action(value!, true, heading);
                 })
       ],
     ));

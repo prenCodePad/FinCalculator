@@ -51,17 +51,17 @@ class RepaymentSchedule extends StatelessWidget {
                       Expanded(
                           flex: 1,
                           child: Text(
-                              "₹${formatter.format(emiSchedule[ind].interest!.toInt())}",
+                              "₹${formatter.format(emiSchedule[ind].interest!.round())}",
                               style: theme.display16w600())),
                       Expanded(
                           flex: 1,
                           child: Text(
-                              "₹${formatter.format(emiSchedule[ind].principal!.toInt())}",
+                              "₹${formatter.format(emiSchedule[ind].principal!.round())}",
                               style: theme.display16w600())),
                       Expanded(
                           flex: 1,
                           child: Text(
-                              "₹${formatter.format(emiSchedule[ind].outstandingBalance!.toInt())}",
+                              "₹${formatter.format(emiSchedule[ind].outstandingBalance!.round())}",
                               style: theme.display16w600()))
                     ],
                   ))))
