@@ -14,13 +14,12 @@ class EMICalculator extends StatelessWidget {
 
   final _tabs = [
     const Tab(text: 'ANALYSIS'),
-    const Tab(text: 'REPORT'),
+    const Tab(text: 'STATEMENT'),
   ];
 
   @override
   Widget build(BuildContext context) {
     var theme = locator<FinAppTheme>();
-    final emiProvider = Provider.of<EMIProvider>(context, listen: true);
     return Container(
         height: theme.emiScreenHeight,
         child: DefaultTabController(
@@ -35,10 +34,8 @@ class EMICalculator extends StatelessWidget {
                     labelPadding: EdgeInsets.zero),
               ),
               Expanded(
-                  child: TabBarView(children: [
-                Analysis(),
-                RepaymentSchedule(emiSchedule: emiProvider.rapaymentSchedule)
-              ]))
+                  child:
+                      TabBarView(children: [Analysis(), RepaymentSchedule()]))
             ])));
   }
 }
@@ -49,29 +46,32 @@ class Analysis extends StatelessWidget {
   Widget build(BuildContext context) {
     final emiProvider = Provider.of<EMIProvider>(context, listen: true);
     var emiVariables = emiProvider.emiVariables;
-
+    var theme = locator<FinAppTheme>();
     return Padding(
-        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+        padding: EdgeInsets.fromLTRB(
+            theme.screenWidth * 0.02, 0, theme.screenWidth * 0.02, 0),
         child: Column(children: [
-          SizedBox(height: 30),
+          SizedBox(height: theme.screenWidth * 0.04),
           Expanded(
-              flex: 1,
+              flex: 5,
               child: Container(
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: emiVariables.keys.map((e) {
-                        return SliderInput(
-                            heading: e,
-                            label: emiVariables[e]!.representation,
-                            sliderValue: emiProvider.sliderValue(e),
-                            controller: emiVariables[e]!.controller!,
-                            min: emiVariables[e]!.min!,
-                            max: emiVariables[e]!.max!,
-                            divisions: emiVariables[e]!.divisions!,
-                            action: emiProvider.setValue);
+                        return Container(
+                            height: theme.fullheight * 0.145,
+                            child: SliderInput(
+                                heading: e,
+                                label: emiVariables[e]!.representation,
+                                sliderValue: emiProvider.sliderValue(e),
+                                controller: emiVariables[e]!.controller!,
+                                min: emiVariables[e]!.min!,
+                                max: emiVariables[e]!.max!,
+                                divisions: emiVariables[e]!.divisions!,
+                                action: emiProvider.setValue));
                       }).toList()))),
           Expanded(
-              flex: 1,
+              flex: 4,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

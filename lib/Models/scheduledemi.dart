@@ -1,13 +1,13 @@
 class ScheduledEMI {
   DateTime? installmentDate;
-  double? interest;
-  double? principal;
-  double? outstandingBalance;
+  double interest;
+  double principal;
+  double outstandingBalance;
 
   ScheduledEMI({
     this.installmentDate,
-    this.interest,
-    this.principal,
-    this.outstandingBalance,
+    this.interest = 0,
+    this.principal = 0,
+    this.outstandingBalance = 0,
   });
 }

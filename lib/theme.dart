@@ -9,41 +9,70 @@ class FinAppTheme {
   Color chipTextColor = const Color(0xff000000);
   Color border = Colors.grey[300]!;
   TextStyle display24() => GoogleFonts.lato(
-      fontSize: 24, fontWeight: FontWeight.w800, color: chipTextColor);
+      fontSize: screenWidth * 0.06,
+      fontWeight: FontWeight.w800,
+      color: chipTextColor);
 
   TextStyle display16() => GoogleFonts.lato(
-      fontSize: 16, fontWeight: FontWeight.w400, color: chipTextColor);
+      fontSize: screenWidth * 0.04,
+      fontWeight: FontWeight.w400,
+      color: chipTextColor);
 
   TextStyle display16w600() => GoogleFonts.lato(
-      fontSize: 16, fontWeight: FontWeight.w600, color: chipTextColor);
+      fontSize: screenWidth * 0.03,
+      fontWeight: FontWeight.w600,
+      color: chipTextColor);
   TextStyle display14w1000() => GoogleFonts.lato(
-      fontSize: 18, fontWeight: FontWeight.bold, color: chipTextColor);
+      fontSize: screenWidth * 0.035,
+      fontWeight: FontWeight.bold,
+      color: chipTextColor);
 
   TextStyle display20w400() => GoogleFonts.lato(
-      fontSize: 20, fontWeight: FontWeight.w400, color: chipTextColor);
+      fontSize: screenWidth * 0.05,
+      fontWeight: FontWeight.w400,
+      color: chipTextColor);
 
   double get calculatorChipHeight => ScreenUtil().screenHeight * 0.27;
   double get quoteHeight => ScreenUtil().screenHeight * 0.25;
   double get noAppBarMargin => ScreenUtil().screenHeight * 0.03;
   double get sliderHeight => ScreenUtil().screenHeight * 0.1;
   double get fullheight => ScreenUtil().screenHeight;
-  double get reportHeight => ScreenUtil().screenHeight * 0.75;
+  double get reportHeight => ScreenUtil().screenHeight * 0.70;
   double get defaultNavBarHeight => ScreenUtil().screenHeight * 0.056;
   double get investmentScreenheight => ScreenUtil().screenHeight * 0.9;
   double get emiScreenHeight => ScreenUtil().screenHeight * 0.9;
   double get chartradius => ScreenUtil().screenWidth * 0.3;
+  double get screenWidth => ScreenUtil().screenWidth;
 
   TextStyle body18w400() => GoogleFonts.lato(
-      fontSize: 18, fontWeight: FontWeight.w800, color: chipTextColor);
+      fontSize: screenWidth * 0.045,
+      fontWeight: FontWeight.w800,
+      color: chipTextColor);
+  TextStyle body18w400AN() => GoogleFonts.lato(
+      fontSize: screenWidth * 0.035,
+      fontWeight: FontWeight.w800,
+      color: chipTextColor);
   TextStyle body12w600() => GoogleFonts.lato(
-      fontSize: 12, fontWeight: FontWeight.w600, color: chipTextColor);
+      fontSize: screenWidth * 0.03,
+      fontWeight: FontWeight.w600,
+      color: chipTextColor);
+  TextStyle body10w600() => GoogleFonts.lato(
+      fontSize: screenWidth * 0.015,
+      fontWeight: FontWeight.w600,
+      color: chipTextColor);
 
   TextStyle body2() => GoogleFonts.lato(
-      fontSize: 20, fontWeight: FontWeight.bold, color: chipTextColor);
+      fontSize: screenWidth * 0.05,
+      fontWeight: FontWeight.bold,
+      color: chipTextColor);
   TextStyle body3() => GoogleFonts.poppins(
-      fontSize: 18, fontWeight: FontWeight.w600, color: chipTextColor);
+      fontSize: screenWidth * 0.045,
+      fontWeight: FontWeight.w600,
+      color: chipTextColor);
   TextStyle body4() => GoogleFonts.poppins(
-      fontSize: 18, fontWeight: FontWeight.w200, color: chipTextColor);
+      fontSize: screenWidth * 0.045,
+      fontWeight: FontWeight.w200,
+      color: chipTextColor);
 
   static BoxShadow _chipShadow = BoxShadow(
       color: Color.fromRGBO(42, 91, 128, 0.12),
@@ -51,9 +80,10 @@ class FinAppTheme {
       offset: const Offset(0, 8));
 
   InputDecoration formTextDecoration(String label) => InputDecoration(
-      contentPadding: new EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+      contentPadding:
+          new EdgeInsets.symmetric(vertical: 0, horizontal: screenWidth * 0.02),
       labelText: label,
-      errorStyle: TextStyle(fontSize: 8),
+      errorStyle: TextStyle(fontSize: screenWidth * 0.02),
       labelStyle: TextStyle(fontWeight: FontWeight.bold),
       border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
@@ -77,10 +107,16 @@ class FinAppTheme {
 
   BoxDecoration appbardecoration() => BoxDecoration(
           gradient: _gradient([
-        Color(0xff1F8BDE),
-        Color(0xff0F9FD8),
+        const Color(0xff1F8BDE),
+        const Color(0xff0F9FD8),
+      ]));
+  BoxDecoration drawerBarDecoration() => BoxDecoration(
+          gradient: _gradient([
+        const Color(0xff1F8BDE),
+        const Color(0xff0F9FD8),
+        const Color(0xffA2EABB)
       ]));
 
   TextStyle display24w600() => GoogleFonts.poppins(
-      fontSize: 24, fontWeight: FontWeight.w600, color: white);
+      fontSize: screenWidth * 0.045, fontWeight: FontWeight.w600, color: white);
 }

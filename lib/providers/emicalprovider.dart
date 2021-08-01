@@ -21,7 +21,7 @@ class EMIProvider extends ChangeNotifier {
             representation: "₹"),
         "Interest Rate": CalculationVariables(
             controller: interestController,
-            divisions: 23,
+            divisions: 40,
             max: 20,
             min: 0,
             representation: "%"),
@@ -59,19 +59,23 @@ class EMIProvider extends ChangeNotifier {
         "Loan Tenure": tenureController,
       };
 
-  List<ScheduledEMI> get rapaymentSchedule => _getRepaymentSchedule();
+  List<ScheduledEMI> get rapaymentSchedule =>
+      _isReportForyear ? _getRepaymentScheduleYear() : _getRepaymentSchedule();
+
   bool _isTenureInMonths = false;
+  bool _isReportForyear = false;
   bool get isTenureInMonths => _isTenureInMonths;
+  bool get isReportForyear => _isReportForyear;
   double get loanAmount => _loanAmount;
   double get interestRate => _interestRate;
   double get tenure => _tenure;
   double get tenureInMonths => tenure * 12;
 
-  double get rateOFAnnualInterest =>
-      tenure == 0 ? 0 : (interestRate * 0.01) / 12;
+  double get rateOFAnnualInterest => (interestRate * 0.01) / 12;
 
   double get emi {
-    if (rateOFAnnualInterest == 0.0) {
+    print("nnn$tenure");
+    if (rateOFAnnualInterest == 0.0 || tenure.toInt() == 0) {
       return tenure.toInt() == 0 ? 0 : loanAmount / tenureInMonths;
     } else {
       return loanAmount *
@@ -93,13 +97,20 @@ class EMIProvider extends ChangeNotifier {
     } else if (attribute == "Interest Rate") {
       setInterest(value);
     } else {
-      setTenure(value);
+      setTenure(value.round().toDouble());
     }
 
     if (isSlider) {
-      _controllerMap[attribute]!.text = value.round().toString();
+      _controllerMap[attribute]!.text = attribute == "Interest Rate"
+          ? value.toString()
+          : value.round().toString();
     }
 
+    notifyListeners();
+  }
+
+  void setisReportforMonth() {
+    _isReportForyear = !_isReportForyear;
     notifyListeners();
   }
 
@@ -121,18 +132,14 @@ class EMIProvider extends ChangeNotifier {
     var outstandingAmount = loanAmount;
     List<ScheduledEMI> emiSchedule = [];
 
-    for (int i = 1; i <= tenureInMonths; i++) {
+    for (int i = 0; i < tenureInMonths; i++) {
       double interest;
       double principal;
       ScheduledEMI installment = new ScheduledEMI();
       interest = rateOFAnnualInterest * outstandingAmount;
-      print("interest$rateOFAnnualInterest");
-      print("outsnading$outstandingAmount");
-      print("interest$interest");
-
       principal = emi - interest;
       outstandingAmount = outstandingAmount - principal;
-      installment.installmentDate = i == 1
+      installment.installmentDate = i == 0
           ? DateTime.now()
           : Jiffy(DateTime.now()).add(months: i).dateTime;
       installment.interest = interest;
@@ -142,6 +149,57 @@ class EMIProvider extends ChangeNotifier {
     }
 
     return emiSchedule;
+  }
+
+  List<DateTime> _getAllYears() {
+    List<DateTime> allYears = [];
+    var date = new DateTime.now();
+    for (int i = 0; i <= tenure; i++) {
+      DateTime year = DateTime(date.year + i, date.month, date.day);
+      allYears.add(year);
+    }
+
+    return allYears;
+  }
+
+  Map<DateTime, List<ScheduledEMI>> _getRepaymentScheduleYear1() {
+    List<ScheduledEMI> yearEmi = _getRepaymentSchedule();
+    for (int i = 0; i < yearEmi.length; i++) {}
+
+    return {};
+  }
+
+  List<ScheduledEMI> _getRepaymentScheduleYear() {
+    List<ScheduledEMI> monthlyEmi = _getRepaymentSchedule();
+    List<DateTime> years = _getAllYears();
+    List<ScheduledEMI> yearlyEmi = [];
+    print("1111${years.length}");
+    for (int i = 0; i < years.length; i++) {
+      ScheduledEMI emi = new ScheduledEMI();
+      emi.installmentDate = years[i];
+      print("${years[i]}");
+      emi.interest = monthlyEmi
+          .where((element) => element.installmentDate!.year == years[i].year)
+          .fold(0, (previousValue, element) {
+        print("${element.interest}");
+        return previousValue + element.interest.round();
+      });
+      emi.outstandingBalance = monthlyEmi
+          .where((element) => element.installmentDate!.year == years[i].year)
+          .last
+          .outstandingBalance
+          .roundToDouble();
+      emi.principal = monthlyEmi
+          .where((element) => element.installmentDate!.year == years[i].year)
+          .fold(
+              0,
+              (previousValue, element) =>
+                  previousValue + element.principal.round());
+      yearlyEmi.add(emi);
+      print("$emi");
+    }
+
+    return yearlyEmi;
   }
 
   Map<String, double> get dataMap => {

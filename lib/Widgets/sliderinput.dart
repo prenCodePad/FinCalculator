@@ -35,22 +35,20 @@ class SliderInput extends StatelessWidget {
             action: action,
             max: max,
             min: min),
-        heading == "Monthly Investment" ||
-                heading == "Total Investment" ||
-                heading == "Loan Amount"
+        heading == "Loan Tenure" || heading == "Time Period"
             ? Slider(
-                value: sliderValue,
+                value: sliderValue.toDouble(),
                 min: min,
                 max: max,
-                divisions: divisions,
                 onChanged: (double? value) {
                   FocusManager.instance.primaryFocus?.unfocus();
                   action(value!, true, heading);
                 })
             : Slider(
-                value: sliderValue.toDouble(),
+                value: sliderValue,
                 min: min,
                 max: max,
+                divisions: divisions,
                 onChanged: (double? value) {
                   FocusManager.instance.primaryFocus?.unfocus();
                   action(value!, true, heading);

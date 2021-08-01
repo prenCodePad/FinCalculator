@@ -37,7 +37,7 @@ class Results extends StatelessWidget {
         //"₹${formatter.format(value1.isNaN || value1.isInfinite ? 0 : value1 == 0 ? 0 : value1.toInt())}",
         style: theme.body2(),
       ),
-      SizedBox(height: 15),
+      SizedBox(height: theme.screenWidth * 0.025),
       Text(
         label2,
         style: theme.body4(),
@@ -47,7 +47,7 @@ class Results extends StatelessWidget {
         // "₹${formatter.format(value2.isNaN ? 0 : value2.toInt())}",
         style: theme.body2(),
       ),
-      SizedBox(height: 15),
+      SizedBox(height: theme.screenWidth * 0.025),
       Text(
         label3,
         style: theme.body4(),
@@ -57,7 +57,7 @@ class Results extends StatelessWidget {
         //  "₹${formatter.format(value3.isNaN ? value1.isNaN ? 0 : value1 : value3.toInt())}",
         style: theme.body2(),
       ),
-      SizedBox(height: 15),
+      SizedBox(height: theme.screenWidth * 0.025),
     ]));
   }
 }

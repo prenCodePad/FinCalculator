@@ -25,6 +25,7 @@ class EMIScreen extends StatelessWidget {
             ),
             backgroundColor: theme.white,
             body: SingleChildScrollView(
+              
                 child: ChangeNotifierProvider(
                     create: (_) => EMIProvider(), child: EMICalculator()))));
   }

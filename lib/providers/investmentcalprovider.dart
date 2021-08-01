@@ -14,7 +14,7 @@ class InvestmentProvider with ChangeNotifier {
                 representation: "₹"),
         "Est Return Rate": CalculationVariables(
             controller: returnRateController,
-            divisions: 27,
+            divisions: 60,
             max: 30,
             min: 0,
             representation: "%"),
@@ -67,7 +67,7 @@ class InvestmentProvider with ChangeNotifier {
   double get timeperiodMonths => _timeperiod * 12;
   double get timePeriodYears => _timeperiod;
   double get maturityForSip {
-    if (rateOfInterestMonthly.round() == 0) {
+    if (rateOfInterestMonthly == 0 || rateOfInterestMonthly == 0.0) {
       return investedValue * timeperiodMonths;
     } else {
       return investedValue *
@@ -121,7 +121,9 @@ class InvestmentProvider with ChangeNotifier {
       setTimePeriod(value);
     }
     if (isSlider) {
-      _controllerMap[attribute]!.text = value.round().toString();
+      _controllerMap[attribute]!.text = attribute == "Est Return Rate"
+          ? value.toString()
+          : value.round().toString();
     }
 
     notifyListeners();

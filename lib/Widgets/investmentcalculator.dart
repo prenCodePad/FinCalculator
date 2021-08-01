@@ -17,17 +17,20 @@ class InvestmentCalculator extends StatelessWidget {
     var investmentVariables = investmentProvider.investmentVariables;
     return Container(
         height: theme.investmentScreenheight,
-        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+        padding: EdgeInsets.fromLTRB(
+            theme.screenWidth * 0.02, 0, theme.screenWidth * 0.02, 0),
         child: Column(children: [
           Expanded(flex: 1, child: InvestmentType()),
-          SizedBox(height: 15),
+          SizedBox(height: theme.screenWidth * 0.025),
           Expanded(
               flex: 5,
               child: Container(
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: investmentVariables.keys
-                          .map((e) => SliderInput(
+                          .map((e) => Container(
+                              height: theme.fullheight * 0.145,
+                              child: SliderInput(
                                 action: investmentProvider.setValue,
                                 heading: e,
                                 label: investmentVariables[e]!.representation,
@@ -36,10 +39,10 @@ class InvestmentCalculator extends StatelessWidget {
                                 max: investmentVariables[e]!.max!,
                                 min: investmentVariables[e]!.min!,
                                 sliderValue: investmentProvider.sliderValue(e),
-                              ))
+                              )))
                           .toList()))),
           Expanded(
-              flex: 5,
+              flex: 4,
               child: Row(
                 children: [
                   Expanded(
@@ -82,7 +85,7 @@ class InvestmentType extends StatelessWidget {
                         investmentProvider.setTypesOfInvestment(value);
                       }),
                   Text(e, style: theme.display16w600()),
-                  if (e == "SIP") SizedBox(width: 30)
+                  if (e == "SIP") SizedBox(width: theme.screenWidth * 0.045)
                 ]))
             .toList());
   }

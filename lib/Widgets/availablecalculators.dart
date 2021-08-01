@@ -1,5 +1,6 @@
 import 'package:fincalculator/Screens/emiscreen.dart';
 import 'package:fincalculator/Screens/investmentscreen.dart';
+import 'package:fincalculator/Widgets/animatedtext.dart';
 import 'package:fincalculator/Widgets/calculatordefinition.dart';
 import 'package:fincalculator/locator.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,7 +27,7 @@ class AvailableCalculators extends StatelessWidget {
     var theme = locator<FinAppTheme>();
 
     return Column(children: [
-      SizedBox(height: 15),
+      SizedBox(height: theme.fullheight * 0.02),
       Container(
           height: theme.quoteHeight,
           width: double.infinity,
@@ -34,19 +35,14 @@ class AvailableCalculators extends StatelessWidget {
             color: Colors.lightBlueAccent[100],
             shape: BoxShape.circle,
           ),
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            SizedBox(height: 10),
-            Text("\"Investing is Simple", style: theme.body18w400()),
-            Text("But not easy.\"", style: theme.body18w400()),
-            SizedBox(height: 20),
-            Text("-Warren Buffet", style: theme.body12w600()),
-          ])),
-      SizedBox(height: 5),
+          child: AnimatedText()),
+      SizedBox(height: theme.fullheight * 0.01),
       ListView(
         shrinkWrap: true,
         children: [
           ...decidedCalculators.keys
               .map((e) => Calculator(
+                  imageheight: theme.fullheight * 0.12,
                   heading: e,
                   content: decidedCalculators[e]!["content"]!,
                   imagePath: decidedCalculators[e]!["image"]!,

@@ -15,12 +15,12 @@ class DonutRepresentation extends StatelessWidget {
     return PieChart(
       dataMap: dataMap,
       animationDuration: Duration(milliseconds: 2000),
-      chartLegendSpacing: 32,
+      chartLegendSpacing: theme.fullheight * 0.05,
       chartRadius: theme.chartradius,
       colorList: colorList,
       initialAngleInDegree: 270,
       chartType: ChartType.ring,
-      ringStrokeWidth: 32,
+      ringStrokeWidth: theme.fullheight * 0.04,
       centerText: "",
       legendOptions: LegendOptions(
         showLegendsInRow: false,
