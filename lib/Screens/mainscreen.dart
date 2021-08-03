@@ -18,7 +18,12 @@ class MainScreen extends StatelessWidget {
           children: [
             DrawerHeader(
                 decoration: theme.drawerBarDecoration(),
-                child: Text("Calculators", style: theme.display24w600())),
+                child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Center(
+                        child: Image(
+                      image: AssetImage('assets/images/Fin2.png'),
+                    )))),
             GestureDetector(
               onTap: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => InvestmentScreen())),

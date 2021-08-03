@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
         builder: () => MaterialApp(
-            title: 'FinCal',
+            title: 'FinoCal',
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),

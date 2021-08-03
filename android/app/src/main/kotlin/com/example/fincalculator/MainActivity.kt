@@ -1,4 +1,4 @@
-package com.example.fincalculator
+package com.finocal.financialcalculator
 
 import io.flutter.embedding.android.FlutterActivity
 

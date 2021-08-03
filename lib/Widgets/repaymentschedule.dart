@@ -86,7 +86,7 @@ class RepaymentSchedule extends StatelessWidget {
                           _textForreport(
                               "₹${formatter.format(emiSchedule[ind].interest.round())}"),
                           _textForreport(
-                              "₹${formatter.format(emiSchedule[ind].interest.round() + emiSchedule[ind].principal.round())}"),
+                              "₹${formatter.format(emiProvider.emi)}"),
                           _textForreport(
                               "₹${formatter.format(emiSchedule[ind].outstandingBalance.round())}")
                         ],
