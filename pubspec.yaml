@@ -49,7 +49,7 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/Fin.png"
+  image_path: "assets/images/Fin3.png"
   adaptive_icon_background: "#0F9FD8"
 
 

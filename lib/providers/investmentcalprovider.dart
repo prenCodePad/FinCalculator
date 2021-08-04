@@ -8,8 +8,8 @@ class InvestmentProvider with ChangeNotifier {
         typeOfInvestment == "SIP" ? "Monthly Investment" : "Total Investment":
             CalculationVariables(
                 controller: investmentController,
-                divisions: 200,
-                max: 200000,
+                divisions: 10000,
+                max: 10000000,
                 min: 0,
                 representation: "₹"),
         "Est Return Rate": CalculationVariables(
@@ -122,7 +122,7 @@ class InvestmentProvider with ChangeNotifier {
     }
     if (isSlider) {
       _controllerMap[attribute]!.text = attribute == "Est Return Rate"
-          ? value.toString()
+          ? value.toStringAsFixed(1)
           : value.round().toString();
     }
 

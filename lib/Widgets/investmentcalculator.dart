@@ -38,7 +38,10 @@ class InvestmentCalculator extends StatelessWidget {
                                 divisions: investmentVariables[e]!.divisions!,
                                 max: investmentVariables[e]!.max!,
                                 min: investmentVariables[e]!.min!,
-                                sliderValue: investmentProvider.sliderValue(e),
+                                sliderValue: investmentProvider.sliderValue(e) >
+                                        investmentVariables[e]!.max!
+                                    ? investmentVariables[e]!.max!
+                                    : investmentProvider.sliderValue(e),
                               )))
                           .toList()))),
           Expanded(

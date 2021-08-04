@@ -22,7 +22,7 @@ class MainScreen extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     child: Center(
                         child: Image(
-                      image: AssetImage('assets/images/Fin2.png'),
+                      image: AssetImage('assets/images/Fin4.png'),
                     )))),
             GestureDetector(
               onTap: () => Navigator.of(context)
