@@ -22,16 +22,20 @@ class RepaymentSchedule extends StatelessWidget {
       "Outstanding",
     ];
     var formatter = NumberFormat('#,##,##0');
+    final emiProvider = Provider.of<EMIProvider>(context, listen: true);
+    var emiSchedule = emiProvider.rapaymentSchedule;
 
     _textForreport(String text) {
       return Expanded(flex: 1, child: Text(text, style: theme.display16w600()));
     }
 
-    final emiProvider = Provider.of<EMIProvider>(context, listen: true);
-    var emiSchedule = emiProvider.rapaymentSchedule;
+    _getEmi() {
+      if (emiProvider.isReportForyear) {}
+    }
+
     return Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
       Container(
-          height: theme.fullheight * 0.08,
+          height: theme.fullheight * 0.07,
           padding: EdgeInsets.all(theme.screenWidth * 0.015),
           child: ToggleSwitch(
             activeBgColor: [
@@ -86,7 +90,7 @@ class RepaymentSchedule extends StatelessWidget {
                           _textForreport(
                               "₹${formatter.format(emiSchedule[ind].interest.round())}"),
                           _textForreport(
-                              "₹${formatter.format(emiProvider.emi)}"),
+                              "₹${!emiProvider.isReportForyear ? formatter.format(emiProvider.emi) : formatter.format((emiProvider.emi * 12 - (emiSchedule[ind].principal.round() + emiSchedule[ind].interest.round())) < 50 ? emiProvider.emi * 12 : emiSchedule[ind].principal.round() + emiSchedule[ind].interest.round())}"),
                           _textForreport(
                               "₹${formatter.format(emiSchedule[ind].outstandingBalance.round())}")
                         ],

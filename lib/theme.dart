@@ -23,7 +23,7 @@ class FinAppTheme {
       fontWeight: FontWeight.w600,
       color: chipTextColor);
   TextStyle display14w1000() => GoogleFonts.lato(
-      fontSize: screenWidth * 0.035,
+      fontSize: screenWidth * 0.028,
       fontWeight: FontWeight.bold,
       color: chipTextColor);
 
