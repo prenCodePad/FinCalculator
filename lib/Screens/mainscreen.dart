@@ -25,23 +25,33 @@ class MainScreen extends StatelessWidget {
                       image: AssetImage('assets/images/Fin4.png'),
                     )))),
             GestureDetector(
-              onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => InvestmentScreen())),
-              child: ListTile(
-                leading: Text(
-                  "Investment Calculator",
-                  style: theme.display14w1000(),
-                ),
-                trailing: Icon(Icons.chevron_right),
-              ),
-            ),
+                behavior: HitTestBehavior.opaque,
+                onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => InvestmentScreen())),
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Investment Calculator",
+                          style: theme.display14w1000(),
+                        ),
+                        Icon(Icons.chevron_right),
+                      ]),
+                )),
             GestureDetector(
+              behavior: HitTestBehavior.opaque,
               onTap: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => EMIScreen())),
-              child: ListTile(
-                leading: Text("EMI Calculator", style: theme.display14w1000()),
-                trailing: Icon(Icons.chevron_right),
-              ),
+              child: Container(
+                  padding: EdgeInsets.all(10),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("EMI Calculator", style: theme.display14w1000()),
+                        Icon(Icons.chevron_right),
+                      ])),
             )
           ],
         ),

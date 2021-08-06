@@ -74,7 +74,6 @@ class EMIProvider extends ChangeNotifier {
   double get rateOFAnnualInterest => (interestRate * 0.01) / 12;
 
   double get emi {
-    print("nnn$tenure");
     if (rateOFAnnualInterest == 0.0 || tenure.toInt() == 0) {
       return tenure.toInt() == 0 ? 0 : loanAmount / tenureInMonths;
     } else {
@@ -173,15 +172,12 @@ class EMIProvider extends ChangeNotifier {
     List<ScheduledEMI> monthlyEmi = _getRepaymentSchedule();
     List<DateTime> years = _getAllYears();
     List<ScheduledEMI> yearlyEmi = [];
-    print("1111${years.length}");
     for (int i = 0; i < years.length; i++) {
       ScheduledEMI emi = new ScheduledEMI();
       emi.installmentDate = years[i];
-      print("${years[i]}");
       emi.interest = monthlyEmi
           .where((element) => element.installmentDate!.year == years[i].year)
           .fold(0, (previousValue, element) {
-        print("${element.interest}");
         return previousValue + element.interest.round();
       });
       emi.outstandingBalance = monthlyEmi
@@ -196,7 +192,6 @@ class EMIProvider extends ChangeNotifier {
               (previousValue, element) =>
                   previousValue + element.principal.round());
       yearlyEmi.add(emi);
-      print("$emi");
     }
 
     return yearlyEmi;

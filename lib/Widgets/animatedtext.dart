@@ -44,18 +44,3 @@ class AnimatedText extends StatelessWidget {
             autoPlay: true, autoPlayAnimationDuration: Duration(seconds: 2)));
   }
 }
-
-  // Container(
-  //         height: theme.quoteHeight,
-  //         width: double.infinity,
-  //         decoration: BoxDecoration(
-  //           color: Colors.lightBlueAccent[100],
-  //           shape: BoxShape.circle,
-  //         ),
-  //         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-  //           SizedBox(height: theme.fullheight * 0.01),
-  //           Text('''"Investing is Simple 
-  //           But not easy"''', style: theme.body18w400()),
-  //           SizedBox(height: theme.fullheight * 0.02),
-  //           Text("-Warren Buffet", style: theme.body12w600()),
-  //         ])),
